@@ -17,6 +17,7 @@ return [
     */
 
     'driver' => env('MAIL_DRIVER', 'smtp'),
+    // 'driver' => env('MAIL_DRIVER', 'log'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,9 +57,13 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        // 'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
+        // 'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', null),
+        'name' => env('MAIL_FROM_NAME', null),
     ],
+    
+
 
     /*
     |--------------------------------------------------------------------------
@@ -112,12 +117,14 @@ return [
     |
     */
 
-    'markdown' => [
-        'theme' => 'default',
+    // 'markdown' => [
+    //     'theme' => 'default',
 
-        'paths' => [
-            resource_path('views/vendor/mail'),
-        ],
-    ],
+    //     'paths' => [
+    //         resource_path('views/vendor/mail'),
+    //     ],
+    // ],
+    
+    'pretend' => env('MAIL_PRETEND', false),
 
 ];
