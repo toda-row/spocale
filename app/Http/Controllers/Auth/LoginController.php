@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Socialite;
+use App\Event;
+use App\Member;
+use App\User;
+
+
 
 class LoginController extends Controller
 {
@@ -48,7 +53,55 @@ class LoginController extends Controller
 
 	public function handleProviderCallback()
 	{
-		$user = Socialite::driver('facebook')->user();
-		dd($user);
+// 		dd($user);
+         	// ユーザー情報取得
+            $userData = Socialite::driver('facebook')->user();
+            // dd($userData);
+            // ユーザー作成
+            $user = User::firstOrCreate([
+                    'name' => $userData->getName(),
+                    'email' => $userData->getEmail()
+            ]);
+            $user->save();
+            
+            Auth::login($user);
+        dd($user);
+            return redirect('/');
 	}
+	
+	
+// 	ツイッターログイン
+// 	protected $redirectPath = '/home';
+
+//     public function redirectToProvider(){
+//         return Socialite::driver('twitter')->redirect();
+//     }
+
+//     public function handleProviderCallback(){
+//         try {
+//             $user = Socialite::driver('twitter')->user();
+//         } catch (Exception $e) {
+//             return redirect('auth/twitter');
+//         }
+//         $authUser = $this->findOrCreateUser($user);
+//         Auth::login($authUser, true);
+//         return redirect()->route('home');
+//     }
+
+//     private function findOrCreateUser($twitterUser){
+//         $authUser = User::where('twitter_id', $twitterUser->id)->first();
+//         if ($authUser){
+//             return $authUser;
+//         }
+//         return User::create([
+//             'name' => $twitterUser->name,
+//             'nickname' => $twitterUser->nickname,
+//             'twitter_id' => $twitterUser->id,
+//             'avatar' => $twitterUser->avatar_original
+//         ]);
+//     }
+	
+	
+	
+	
 }

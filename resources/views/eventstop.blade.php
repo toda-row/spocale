@@ -38,7 +38,7 @@
                                     </div>
                                          {{csrf_field()}}
                                             <?php
-                                                $short = substr("{$event->event_date}",6,10);
+                                                $short = substr("{$event->event_date}",5,11);
                                             ?>
                                     <p><?=$short;?></p>
                                     <p>{{ $event->event_price}}円/{{ $event->event_area}}/{{ $event->event_type}}</p>
@@ -48,6 +48,8 @@
                                         <h3>{{ $event->event_name}}</h3>
                                         <p><?=$short;?></p>
                                         <p>{{ $event->event_price}}円/{{ $event->event_area}}</p>
+                                        <p>主催者：{{ $event->name}}</p>
+                                        
                                     </div>
                                 </div>
                             </a>
@@ -63,4 +65,8 @@
             <!-- イベント: 既 に 登 録 されてる リスト -->
     </div>
         <!-- Event: 既 に 登 録 されてる 本 のリスト -->
+        
+        
+@include('footer')     
+        
 @endsection

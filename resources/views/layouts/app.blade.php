@@ -64,34 +64,35 @@
                                      
                         @else
                         <li><a href="https://phpadmin-todarow.c9users.io/phpmyadmin" target=”_blank”>phpmyadmin</a></li>
-                            <li><a href="{{ url('events/new/')}}">イベント作成</a></li>
-                            <li><a href="{{ url('events/')}}">イベント管理</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
-                                    {{ Auth::user()->name }} さん<span class="caret"></span>
-                                </a>
+                        <li><a href="{{ url('events/mail/')}}">メールテスト</a></li> 
+                        <li><a href="{{ url('events/new/')}}">イベント作成</a></li>
+                        <li><a href="{{ url('events/')}}">イベント管理</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                                {{ Auth::user()->name }} さん<span class="caret"></span>
+                            </a>
 
-                                <ul class="dropdown-menu">
-                                    
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                            <ul class="dropdown-menu">
+                                
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        Logout
+                                    </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                    <li>
-                                        <a href="{{ url('events/profile/')}}">
-                                        プロフィール編集
-                                        </a>
-                                    </li>
-                                    
-                                </ul>
-                            </li>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                                <li>
+                                    <a href="{{ url('events/profile/'.Auth::user()->id)}}">
+                                    プロフィール編集
+                                    </a>
+                                </li>
+                                
+                            </ul>
+                        </li>
                         @endguest
                     </ul>
                 </div>
@@ -100,6 +101,8 @@
 
         @yield('content')
     </div>
+
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

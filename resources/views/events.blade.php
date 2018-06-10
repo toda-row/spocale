@@ -48,11 +48,10 @@
                                 </td>
                                 <td class="table-text">
                                     <?php
-                                                $short = substr("{$event->event_date}",6,10);
-                                                
+                                                $short = substr("{$event->event_date}",5,11);
                                     ?>
                                     <div><?=$short;?></div>
-                                    {{ date('H:i', strtotime($event->time)) }}
+
                                 </td>
                                      <!-- 本: 更新 ボタン -->
                                  <td>

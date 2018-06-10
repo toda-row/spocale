@@ -29,3 +29,4 @@
 [05-May-2018 04:53:03 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 352256 bytes) in /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 132
 [05-May-2018 04:57:40 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 397312 bytes) in /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 132
 [05-May-2018 05:03:35 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 450560 bytes) in /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 132
+[10-Jun-2018 06:46:04 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\AuthenticatesUsers' not found in /home/ubuntu/workspace/base/app/Http/Controllers/UsersController.php on line 17

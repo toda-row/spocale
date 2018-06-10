@@ -20,6 +20,7 @@ Route::get('/events','EventsController@store');
 
 
 /** * イベント参加処理 */
+Route::get('/attend','MembersController@attend');
 Route::post('/attend','MembersController@attend');
 
 /** * イベント作成画面 */
@@ -54,8 +55,14 @@ Route::get('/search', 'EventsController@getSearch');
 // Route::get('/home', 'EventsController@index')->name('home');
 
 
+/** *  ユーザー更新画面 */
+Route::get('/events/profile/{users}','UsersController@edit');
 
-Route::get('auth/login', 'SocialController@viewLogin');
+/** *  ユーザー更新処理 */
+Route::post('/events/profile/update','UsersController@update');
+
+
+// Route::get('auth/login', 'SocialController@viewLogin');
 // Route::get('auth/login/facebook', 'Auth\SocialController@redirectToFacebookProvider');
 // Route::get('auth/facebook/callback', 'Auth\SocialController@handleFacebookProviderCallback');
 
@@ -63,12 +70,30 @@ Route::get('auth/login', 'SocialController@viewLogin');
 // Route::get('/login/facebook', 'SocialController@getFacebookAuth');
 // Route::get('/login/callback/facebook', 'SocialController@getFacebookAuthCallback');
 
+// facebook
 Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('auth/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
+
+// Route::get('auth/login', 'Auth\SocialController@viewLogin');
+// Route::get('auth/login/facebook', 'Auth\SocialController@redirectToFacebookProvider');
+// Route::get('auth/facebook/callback', 'Auth\SocialController@handleFacebookProviderCallback');
+
+
+
+
+
+// twitter
+Route::get('auth/twitter', 'Auth\LoginController@redirectToProvider');
+Route::get('auth/twitter/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get("auth/twitter/logout","Auth\LoginController@getLogout");
+
 
 //EMAIL
 // Route::get('/events/eventadd', 'EmailsController@EventsNotification');
+Route::get('/events/mail', 'EmailsController@EventsNotification');
 /** * イベント作成処理 */
 
-
-
+/** *  イベント検索結果画面 */
+Route::get('/policy', 'HomeController@policy');
+Route::get('/agreement', 'HomeController@agreement');

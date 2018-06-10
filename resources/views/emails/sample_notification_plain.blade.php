@@ -2,6 +2,10 @@
 
 {{$text}}
 
+{{$eventName}}
+
+
+Price: {{ $eventPrice }}
 詳細はこちら
 URL
 

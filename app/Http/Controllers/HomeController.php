@@ -23,6 +23,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('events');
     }
+    
+    public function policy() {
+            
+            return view('policy');
+            
+            
+            
+        }
+        
+    public function agreement() {
+        
+        return view('agreement');
+        
+            
+            
+        }
+    
 }

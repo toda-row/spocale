@@ -15,7 +15,10 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="date" class="control-label">開催日 </label>
-                            <input type="datetime-local" name="event_date" id="event-date" class="form-control" > 
+                            <?php
+                                $date = new DateTime('now');
+                            ?>
+                            <input type="datetime-local" name="event_date" id="event-date" class="form-control" value="<?= $date->modify('+7 days')->format('Y-m-d\TH:i') ?>"> 
                             
                         </div>                        
                         <div class="col-sm-6">

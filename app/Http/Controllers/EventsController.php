@@ -7,24 +7,50 @@ use App\Event;
 use App\Member;
 use Validator;
 use Auth;
+use Mail;
+
+use App\Mail\EventsNotification;
+
 
 class EventsController extends Controller
 {
 
+        // protected $eventsnotification;
+        //追加
+        
                 // ログイン処理
         public function __construct(){
             
             // $this->middleware('auth')->except(['index']);
             $this->middleware('auth')->except(['index', 'detail']);
+            
+            
+            // $this-> emails = $eventsnotification;
+            //追加
         }
+        
+                
+        
+        
         
         // トップ画面 表示
         public function index() {
-            $events = Event::orderBy('event_date', 'asc')->paginate(10);
+            $events = Event::orderBy('event_date', 'asc')
+                        ->join('users','users.id','=','events.user_id')
+                        ->select('events.*', 'users.name')
+                        // ->join('events.user_id','=','users','users.id')
+                        ->paginate(10);
             //並び替えてすべてのイベントを表示
+            
+            
+            // dd($events);
+            
             return view('eventstop', [
                 'events' => $events,
             ]);
+            
+            
+            
         }
         
         //新規イベント作画面
@@ -44,15 +70,13 @@ class EventsController extends Controller
                 'description' => 'required |min:3 | max:2000',
                 ]);
         // dd($validator);
-            //バリデーション： エラー
+            //バリデーション：エラー
             if ($validator->fails()) {
                 return redirect('/')
                     ->withInput()
                     ->withErrors($validator);
                 }
-
             // Eloquent モデル 
-        
             $events = new Event;
             $events->user_id = Auth::user()->id; // 追加 のコード
             $events->event_name = $request->event_name;
@@ -66,7 +90,7 @@ class EventsController extends Controller
   
             
             $file = $request->filename;
-            dd($file);
+            // dd($file);
             //物理保存
             $name = $file->getClientOriginalName();
             $move = $file->move('storage', $name);
@@ -77,6 +101,8 @@ class EventsController extends Controller
             
             $events->save(); 
             // dd($events);
+            
+            
             return redirect('/events');
         }
         
@@ -158,7 +184,6 @@ class EventsController extends Controller
             // ;dd($attendsevents);
             //取得できているが違う
  
-
             
             return view('events', [
                 'events' => $events,
@@ -271,4 +296,7 @@ class EventsController extends Controller
               ->with('keyword',$keyword)
               ->with('event','ユーザーリスト');
         }
+        
+        
+
 }

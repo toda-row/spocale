@@ -58,7 +58,11 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+                                <a class="btn btn-block btn-social btn-facebook" href="login/facebook">
+                                    <span class="fa fa-facebook"></span> Sign in with Facebook
+                                </a>
                             </div>
+                            
                         </div>
                     </form>
                 </div>
@@ -66,4 +70,28 @@
         </div>
     </div>
 </div>
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{FACEBOOK_APP_ID}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '4.0'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
 @endsection

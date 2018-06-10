@@ -6,6 +6,10 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Event;
+use User;
+use Auth;
+use Mail;
 
 class EventsNotification extends Mailable
 {
@@ -13,17 +17,22 @@ class EventsNotification extends Mailable
 
     protected $title;
     protected $text;
+    public $events;
     
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name, $text)
+    public function __construct($name, $text, $events)
     {
         //
-        $this->title = sprintf('%sさん、ありがとうございます。', $name);
+        $this->title = sprintf('スポカレ %sさん、ありがとうございます。', $name);
         $this->text = $text;
+        $this->events = $events;
+        // dd($this);
+        // dd($events);
+
     }
 
     /**
@@ -33,6 +42,8 @@ class EventsNotification extends Mailable
      */
     public function build()
     {
+        // dd($this);
+        // dd($events);
         // return $this->view('view.name');
         return $this
                     // ->view('emails.sample_notification')
@@ -40,6 +51,9 @@ class EventsNotification extends Mailable
                     ->subject($this->title)
                     ->with([
                         'text' => $this->text,
+                        'eventName' => $this->events->event_name,
+                        'eventPrice' => $this->events->event_price,
+                        
                       ]);
         
     }

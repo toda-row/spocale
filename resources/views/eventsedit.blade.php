@@ -12,7 +12,10 @@
                 </div>
                 <div class="col-sm-6">
                     <label for="event_date">開催日時</label>
-                    <input type="datetime-local" id="event_date" name="event_date" class="form-control" value="{{$event->event_date->format('Y-m-d\TH:i')}}">
+                    <?php
+                        $beforedate = $event->event_date;
+                    ?>
+                    <input type="datetime-local" id="event_date" name="event_date" class="form-control" value="{{$beforedate->format('Y-m-d\TH:i')}}">
                 </div>
                 <div class="col-sm-6">
                     <label for="event_type">イベントタイプ</label>
