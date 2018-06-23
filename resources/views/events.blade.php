@@ -48,9 +48,10 @@
                                 </td>
                                 <td class="table-text">
                                     <?php
-                                                $short = substr("{$event->event_date}",5,11);
+                                        $sdate = substr("{$event->event_date}",5,5);
+                                        $stime = substr("{$event->event_time}",0,5);
                                     ?>
-                                    <div><?=$short;?></div>
+                                    <div><?=$sdate;?> <?=$stime;?></div>
 
                                 </td>
                                      <!-- 本: 更新 ボタン -->
@@ -64,10 +65,11 @@
                                  
                                 <!-- 本: 削除 ボタン -->
                                 <td>
-                                    <form action="{{ url('events/'.$event->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    {{method_field('DELETE')}}
                                     
+                                    <form action="{{ url('events/delete/'.$event->id)}}" method="POST" onSubmit="return check()">
+                                    {{csrf_field()}}
+                                    <!--{{method_field('DELETE')}}-->
+                                    <input type="hidden" name="life_flg" id="life_flg" value="0" > 
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash glyphicon glyphicon-trash"></i><span class="hidden-xs">削除</span>
                                     </button>

@@ -30,7 +30,8 @@ Route::get('/events/new','EventsController@eventnew');
 Route::post('/events/eventadd','EventsController@create');
 
 /** *  イベント削除 処理 */
-Route::delete('/events/{event}','EventsController@destroy');
+// Route::delete('/events/{event}','EventsController@destroy');
+Route::post('/events/delete/{events}','EventsController@destroy');
 
 /** *  イベント更新画面 */
 Route::post('/events/edit/{events}','EventsController@edit');

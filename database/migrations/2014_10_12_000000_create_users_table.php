@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password')->nullable();
+            $table->string('provider_name')->nullable();  // ←ここ。facebook や twitter などが入る
+            $table->string('provider_id')->nullable();  // ←ここ。各サイトのユーザーID
             $table->rememberToken();
             $table->timestamps();
         });

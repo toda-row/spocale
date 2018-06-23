@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Socialite;
 use App\Event;
 use App\Member;
+use Auth;
 
 class RegisterController extends Controller
 {

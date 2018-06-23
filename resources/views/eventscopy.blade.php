@@ -10,17 +10,21 @@
                     <label for="event_name">イベント名</label>
                     <input type="text" id="event_name" name="event_name" class="form-control" value="{{$event->event_name}}">
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     <label for="date" class="control-label">★新しい開催日★ </label>
-                    <input type="datetime-local" id="event_date" name="event_date" class="form-control" value="{{$event->event_date->format('Y-m-d\TH:i')}}">
+                    <input type="date" id="event_date" name="event_date" class="form-control" value="{{$event->event_date}}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="time" class="control-label">開催時間 </label>
+                    <input type="time" id="event_time" name="event_time" class="form-control" value="{{$event->event_time}}">
                 </div>
                 <div class="col-sm-6">
                     <label for="event_type">イベントタイプ</label>
                     <input type="text" id="event_type" name="event_type" class="form-control" value="{{$event->event_type}}"/>
                 </div>
                 <div class="col-sm-6">
-                    <label for="event_areae">開催エリア</label>
-                    <input type="text" id="event_areae" name="event_areae" class="form-control" value="{{$event->event_area}}"/>
+                    <label for="event_area">開催エリア</label>
+                    <input type="text" id="event_area" name="event_area" class="form-control" value="{{$event->event_area}}"/>
                 </div>
                 <div class="col-sm-6">
                     <label for="event_adress">開催住所</label>
@@ -58,7 +62,8 @@
                 
                 
             </div>
-
+                <input type="hidden" name="life_flg" id="life_flg" value="1" >
+                <input type="hidden" name="id" id="id" value="{{$event->event_id}}" > 
             <!-- Save ボタン/ Back ボタン -->
             <div class="well well-sm">
             <button type="submit" class="btn btn-primary">  複製</button>

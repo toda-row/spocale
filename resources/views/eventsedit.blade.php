@@ -10,13 +10,23 @@
                     <label for="event_name">イベント名</label>
                     <input type="text" id="event_name" name="event_name" class="form-control" value="{{$event->event_name}}">
                 </div>
-                <div class="col-sm-6">
-                    <label for="event_date">開催日時</label>
+                <div class="col-sm-3">
+                    <label for="event_date">開催日</label>
                     <?php
-                        $beforedate = $event->event_date;
+                        // ->format('Y-m-d\TH:i')
+        
                     ?>
-                    <input type="datetime-local" id="event_date" name="event_date" class="form-control" value="{{$beforedate->format('Y-m-d\TH:i')}}">
+                    <input type="date" id="event_date" name="event_date" class="form-control" value="{{$event->event_date}}">
+                    
                 </div>
+                <div class="col-sm-3">
+                    <label for="event_time">開催時間</label>
+                    <?php
+                        // ->format('Y-m-d\TH:i')
+                    ?>
+                    <input type="time" id="event_time" name="event_time" class="form-control" value="{{$event->event_time}}">
+                </div>
+                
                 <div class="col-sm-6">
                     <label for="event_type">イベントタイプ</label>
                     <input type="text" id="event_type" name="event_type" class="form-control" value="{{$event->event_type}}">
@@ -43,6 +53,8 @@
                     <label for="file" class="control-label" >写真の変更 </label>
                     <input type="file" name="filename" id="filename" class="form-control"> 
                 </div>
+                
+
                 <div class="col-sm-6">
                     <label for="description">詳細情報</label>
                     <textarea name="description" id="description" class="form-control" rows="10">{{$event->description}}
@@ -57,7 +69,6 @@
                         @endif
                     </div>
                 </div>
-                
                 
             </div>
 

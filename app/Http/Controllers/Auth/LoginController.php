@@ -8,6 +8,7 @@ use Socialite;
 use App\Event;
 use App\Member;
 use App\User;
+use Auth;
 
 
 
@@ -60,12 +61,14 @@ class LoginController extends Controller
             // ユーザー作成
             $user = User::firstOrCreate([
                     'name' => $userData->getName(),
-                    'email' => $userData->getEmail()
+                    'email' => $userData->getEmail(),
+                    'password' => str_random()
+                 
             ]);
-            $user->save();
+            // $user->save();
             
             Auth::login($user);
-        dd($user);
+        // dd($user);
             return redirect('/');
 	}
 	

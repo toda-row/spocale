@@ -30,3 +30,69 @@
 [05-May-2018 04:57:40 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 397312 bytes) in /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 132
 [05-May-2018 05:03:35 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 450560 bytes) in /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/View/Concerns/ManagesLayouts.php on line 132
 [10-Jun-2018 06:46:04 UTC] PHP Fatal error:  Trait 'App\Http\Controllers\AuthenticatesUsers' not found in /home/ubuntu/workspace/base/app/Http/Controllers/UsersController.php on line 17
+[10-Jun-2018 15:27:37 UTC] PHP Warning:  Uncaught ErrorException: require(vendor/autoload.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Event.php:5
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Event.php(5): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(vendor/...', '/home/ubuntu/wo...', 5, Array)
+#1 /home/ubuntu/workspace/base/app/Event.php(5): require()
+#2 /home/ubuntu/workspace/base/vendor/composer/ClassLoader.php(444): include('/home/ubuntu/wo...')
+#3 /home/ubuntu/workspace/base/vendor/composer/ClassLoader.php(322): Composer\Autoload\includeFile('/home/ubuntu/wo...')
+#4 [internal function]: Composer\Autoload\ClassLoader->loadClass('App\\Event')
+#5 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(38): spl_autoload_call('App\\Event')
+#6 [internal function]: App\Http\Controllers\EventsController->index()
+#7 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#8 /home/ubuntu/wor in /home/ubuntu/workspace/base/app/Event.php on line 5
+[10-Jun-2018 15:27:37 UTC] PHP Fatal error:  main(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Event.php on line 5
+[16-Jun-2018 13:14:38 UTC] PHP Warning:  Uncaught ErrorException: require_once(src/facebook.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php:119
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(119): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require_once(sr...', '/home/ubuntu/wo...', 119, Array)
+#1 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(119): require_once()
+#2 [internal function]: App\Http\Controllers\EventsController->create(Object(Illuminate\Http\Request))
+#3 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('create', Array)
+#5 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\Routing\ControllerDispa in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 119
+[16-Jun-2018 13:14:38 UTC] PHP Fatal error:  App\Http\Controllers\EventsController::create(): Failed opening required 'src/facebook.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 119
+[16-Jun-2018 16:35:25 UTC] PHP Warning:  Uncaught ErrorException: require_once(/home/ubuntu/workspace/base/vendor/facebook/php-sdk-v4/src/Facebook/autoload.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php:122
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(122): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require_once(/h...', '/home/ubuntu/wo...', 122, Array)
+#1 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(122): require_once()
+#2 [internal function]: App\Http\Controllers\EventsController->create(Object(Illuminate\Http\Request))
+#3 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('create', Array)
+#5 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illum in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 122
+[16-Jun-2018 16:35:25 UTC] PHP Fatal error:  App\Http\Controllers\EventsController::create(): Failed opening required '/home/ubuntu/workspace/base/vendor/facebook/php-sdk-v4/src/Facebook/autoload.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 122
+[16-Jun-2018 17:08:29 UTC] PHP Warning:  Uncaught ErrorException: require_once(vendor/facebook/php-sdk-v4/src/Facebook/facebook.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php:122
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(122): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require_once(ve...', '/home/ubuntu/wo...', 122, Array)
+#1 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(122): require_once()
+#2 [internal function]: App\Http\Controllers\EventsController->create(Object(Illuminate\Http\Request))
+#3 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('create', Array)
+#5 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212) in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 122
+[16-Jun-2018 17:08:29 UTC] PHP Fatal error:  App\Http\Controllers\EventsController::create(): Failed opening required 'vendor/facebook/php-sdk-v4/src/Facebook/facebook.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 122
+[16-Jun-2018 17:09:17 UTC] PHP Warning:  Uncaught ErrorException: require_once(vendor/facebook/php-sdk/src/Facebook/Facebook.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php:122
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(122): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require_once(ve...', '/home/ubuntu/wo...', 122, Array)
+#1 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(122): require_once()
+#2 [internal function]: App\Http\Controllers\EventsController->create(Object(Illuminate\Http\Request))
+#3 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('create', Array)
+#5 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): I in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 122
+[16-Jun-2018 17:09:17 UTC] PHP Fatal error:  App\Http\Controllers\EventsController::create(): Failed opening required 'vendor/facebook/php-sdk/src/Facebook/Facebook.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 122
+[16-Jun-2018 17:10:39 UTC] PHP Warning:  Uncaught ErrorException: require_once(/home/ubuntu/workspace/base/vendor/facebook/php-sdk/src/Facebook/Facebook.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php:125
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(125): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require_once(/h...', '/home/ubuntu/wo...', 125, Array)
+#1 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(125): require_once()
+#2 [internal function]: App\Http\Controllers\EventsController->create(Object(Illuminate\Http\Request))
+#3 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('create', Array)
+#5 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illumina in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 125
+[16-Jun-2018 17:10:39 UTC] PHP Fatal error:  App\Http\Controllers\EventsController::create(): Failed opening required '/home/ubuntu/workspace/base/vendor/facebook/php-sdk/src/Facebook/Facebook.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 125
+[18-Jun-2018 17:55:15 UTC] PHP Warning:  Uncaught ErrorException: require(vendor/autoload.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php:144
+Stack trace:
+#0 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(144): Illuminate\Foundation\Bootstrap\HandleExceptions->handleError(2, 'require(vendor/...', '/home/ubuntu/wo...', 144, Array)
+#1 /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php(144): require()
+#2 [internal function]: App\Http\Controllers\EventsController->create(Object(Illuminate\Http\Request))
+#3 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Controller.php(54): call_user_func_array(Array, Array)
+#4 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/ControllerDispatcher.php(45): Illuminate\Routing\Controller->callAction('create', Array)
+#5 /home/ubuntu/workspace/base/vendor/laravel/framework/src/Illuminate/Routing/Route.php(212): Illuminate\Routing\ControllerDispatcher-> in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 144
+[18-Jun-2018 17:55:15 UTC] PHP Fatal error:  App\Http\Controllers\EventsController::create(): Failed opening required 'vendor/autoload.php' (include_path='.:/usr/share/php') in /home/ubuntu/workspace/base/app/Http/Controllers/EventsController.php on line 144

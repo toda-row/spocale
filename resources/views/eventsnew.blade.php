@@ -13,14 +13,24 @@
                             <label for="event" class="control-label">イベント名</label>
                             <input type="text" name="event_name" id="event-name" class="form-control" value="皇居ランニング">
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <label for="date" class="control-label">開催日 </label>
                             <?php
-                                $date = new DateTime('now');
+                                $date = date('Y-m-d');
+                                // ->modify('+7 days') ->format('Y-m-d\TH:i')
                             ?>
-                            <input type="datetime-local" name="event_date" id="event-date" class="form-control" value="<?= $date->modify('+7 days')->format('Y-m-d\TH:i') ?>"> 
+                            <input type="date" name="event_date" id="event-date" class="form-control" value="<?= $date?>"> 
                             
-                        </div>                        
+                        </div>
+                        <div class="col-sm-3">
+                            <label for="time" class="control-label">開催時間 </label>
+                            <?php
+                                $time = date('H:i');
+                                // ->modify('+7 days')->format('Y-m-d\TH:i') 
+                            ?>
+                            <input type="time" name="event_time" id="event-time" class="form-control" value="<?= $time ?>"> 
+                            
+                        </div>
                         <div class="col-sm-6">
                             <label for="event" class="control-label">イベントタイプ</label>
                             <input type="text" name="event_type" id="event-type" class="form-control" value="ランニング">
@@ -41,6 +51,11 @@
                             <label for="email" class="control-label">メール </label>
                             <input type="text" name="email" id="email" class="form-control" value="test@test.jp"> 
                         </div>
+                        <!--画像追加-->
+                        <div class="col-sm-6">
+                           <label for="file" class="control-label" >写真 </label>
+                            <input type="file" name="filename" id="filename" class="form-control"> 
+                        </div>
                         
                         <div class="col-sm-6">
                             <label for="description" class="control-label">詳細 </label>
@@ -50,15 +65,11 @@
                                 
                             </textarea>
                         </div>
-                        <!--画像追加-->
-                        <div class="col-sm-6">
-                           <label for="file" class="control-label" >写真 </label>
-                            <input type="file" name="filename" id="filename" class="form-control"> 
-                        </div>
+                        
                         
                     </div>
 
-                
+                    <input type="hidden" name="life_flg" id="life_flg" value="1" > 
             <!-- Save ボタン/ Back ボタン -->
                 <div class="well well-sm">
                     <button type="submit" class="btn btn-primary"> 

@@ -37,9 +37,11 @@
                                 </td>
                                 <td class="table-text">
                                     <?php
-                                        $attendseventshort = substr("{$attendsevent->event_date}",6,10);
+                                        $attenddate = substr("{$attendsevent->event_date}",5,5);
+                                        $attendtime = substr("{$attendsevent->event_time}",0,5);
                                     ?>
-                                    <div><?=$attendseventshort;?></div>
+                                    <div><?=$attenddate;?> <?=$attendtime;?></div>
+                                    
                                 </td>
                                      <!-- 本: 更新 ボタン -->
                                  <td>

@@ -8,6 +8,11 @@ use App\Member;
 use Validator;
 use Auth;
 use Mail;
+// use Facebook;
+use Facebook\Facebook;
+// use Abraham\TwitterOAuth\TwitterOAuth;
+use TwitterOAuth;
+
 
 use App\Mail\EventsNotification;
 
@@ -38,6 +43,7 @@ class EventsController extends Controller
             $events = Event::orderBy('event_date', 'asc')
                         ->join('users','users.id','=','events.user_id')
                         ->select('events.*', 'users.name')
+                        ->where("life_flg","1")
                         // ->join('events.user_id','=','users','users.id')
                         ->paginate(10);
             //並び替えてすべてのイベントを表示
@@ -67,6 +73,7 @@ class EventsController extends Controller
                 'event_price' => 'required | min:1 | max:10',
                 'email' => 'required',
                 'event_date' => 'required',
+                'event_time' => 'required',
                 'description' => 'required |min:3 | max:2000',
                 ]);
         // dd($validator);
@@ -76,9 +83,11 @@ class EventsController extends Controller
                     ->withInput()
                     ->withErrors($validator);
                 }
+                
             // Eloquent モデル 
             $events = new Event;
             $events->user_id = Auth::user()->id; // 追加 のコード
+            $events->life_flg = $request->life_flg;
             $events->event_name = $request->event_name;
             $events->event_price = $request->event_price;
             $events->event_type = $request->event_type;
@@ -86,10 +95,10 @@ class EventsController extends Controller
             $events->event_adress = $request->event_adress;
             $events->email = $request->email;
             $events->event_date = $request->event_date;
+            $events->event_time = $request->event_time;
             $events->description = $request->description;
-  
-            
             $file = $request->filename;
+            
             // dd($file);
             //物理保存
             $name = $file->getClientOriginalName();
@@ -99,8 +108,55 @@ class EventsController extends Controller
             $dataName = 'storage/'.$name;
             $events->eventpic_filename = $dataName;  
             
-            $events->save(); 
+            // $events->save(); 
             // dd($events);
+            // =============================
+            
+            $facebook_appId = env("FACEBOOK_APP_ID");
+            $facebook_secret = env("FACEBOOK_APP_SECRET");
+            $facebook_access_token = env("FACEBOOK_SPOCALE_ACCESS_TOKEN");
+            
+                        // 投稿したい文章を入力
+            $message = 'FB APIからの投稿です。';
+            
+            // PHP SDKを読み込む。パスを確認すること。
+            // require_once 'src/facebook.php';
+            // require_once 'vendor/facebook/php-sdk/src/Facebook/Facebook.php';
+
+            // require_once( base_path('vendor/facebook/php-sdk-v4/src/Facebook/autoload.php') );
+            // require_once( base_path('vendor/facebook/php-sdk/src/Facebook/Facebook.php') );
+            
+            // $facebook = new Facebook(array('appId' => $facebook_appId, 'secret' => $facebook_secret, 'access_token' => $facebook_access_token, ));
+            // // Facebookオブジェクト生成時にappId、secretを指定しなくても投稿可（投稿時のパラメータにaccess_tokenを指定するため）
+            
+            // // POSTメソッドで「/me/feed/」を指定すると自分のタイムラインに投稿できる
+            
+            // $facebook->api('/144490655923109/feed/', 'GET', array(
+            //     // 'access_token' => $facebook_access_token, 
+            //     'message' => $message
+            //     ));
+            
+            
+            //             Facebookページのウォールに投稿する。
+            // $facebook->api('/（対象ページのID）/feed/', 'GET', array('access_token' => '...', 'message' => '...'));
+
+            
+            // =============================
+            // require "vendor/autoload.php";
+
+
+            $consumerKey       = env("TWITTER_CLIENT_ID");
+            $consumerSecret    = env("TWITTER_CLIENT_SECRET");
+            $accessToken       = env("TWITTER_ACCESS_ID");
+            $accessTokenSecret = env("TWITTER_ACCESS_SECRET");
+            
+            $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+            $result = $twitter->post("statuses/update", array("status" => "TEST Tweet."));
+
+            // =============================
+            
+            $events->save(); 
+            
             
             
             return redirect('/events');
@@ -133,7 +189,7 @@ class EventsController extends Controller
             
             // dd($file);
             //物理保存
-            //うまくいかない　画像更新しないとき
+
              if ($file == null){
                 
                 $events = Event::where('user_id',Auth::user()->id)->find($request->id);//変更後
@@ -141,6 +197,7 @@ class EventsController extends Controller
                 $events->event_price = $request->event_price;
                 $events->email = $request->email;
                 $events->event_date = $request->event_date;
+                $events->event_time = $request->event_time;
                 $events->save();
                  
              }else{
@@ -149,6 +206,7 @@ class EventsController extends Controller
                 $events->event_price = $request->event_price;
                 $events->email = $request->email;
                 $events->event_date = $request->event_date;
+                $events->event_time = $request->event_time;
                 
                 $name = $file->getClientOriginalName();
                 $move = $file->move('storage', $name);
@@ -167,6 +225,7 @@ class EventsController extends Controller
             //全部表示されていたのをユーザーのみに変更
             $events = Event::where('user_id',Auth::user()->id)
             // ;dd($events);
+            ->where("life_flg","1")
             ->orderBy('event_date', 'desc')
             // ;dd($events);
             ->paginate(5);
@@ -181,7 +240,7 @@ class EventsController extends Controller
                 ->join('events','members.event_id', '=', 'events.id')
                 ->orderBy('events.event_date', 'desc')
                 ->paginate(5);
-            // ;dd($attendsevents);
+            // dd($attendsevents);
             //取得できているが違う
  
             
@@ -231,31 +290,56 @@ class EventsController extends Controller
                     ->withErrors($validator);
                 }
 
-            // Eloquent モデル 
+                $file = $request->filename;
+                
+                    // Eloquent モデル 
+                if ($file == null){
+                    $events = new Event;
+                    $events->user_id = Auth::user()->id; // 追加 のコード
+                    $events->life_flg = $request->life_flg;
+                    $events->event_name = $request->event_name;
+                    $events->event_price = $request->event_price;
+                    $events->event_type = $request->event_type;
+                    $events->event_area = $request->event_area;
+                    $events->event_adress = $request->event_adress;
+                    $events->email = $request->email;
+                    $events->event_date = $request->event_date;
+                    $events->event_time = $request->event_time;
+                    $events->description = $request->description;
+                    $copyfile= Event::where('id',$request->id)->first();
+                    // dd($copyfile);
+                    $events->eventpic_filename = $copyfile->eventpic_filename;
+                    
+                    $events->save(); 
+          
+                }else{
+                    $events = new Event;
+                    $events->user_id = Auth::user()->id; // 追加 のコード
+                    $events->life_flg = $request->life_flg;
+                    $events->event_name = $request->event_name;
+                    $events->event_price = $request->event_price;
+                    $events->event_type = $request->event_type;
+                    $events->event_area = $request->event_area;
+                    $events->event_adress = $request->event_adress;
+                    $events->email = $request->email;
+                    $events->event_date = $request->event_date;
+                    $events->event_time = $request->event_time;
+                    $events->description = $request->description;
+                
+                    
+                    $file = $request->filename;
+                    dd($file);
+                    //物理保存
+                    $name = $file->getClientOriginalName();
+                    $move = $file->move('storage', $name);
         
-            $events = new Event;
-            $events->user_id = Auth::user()->id; // 追加 のコード
-            $events->event_name = $request->event_name;
-            $events->event_price = $request->event_price;
-            $events->event_type = $request->event_type;
-            $events->event_area = $request->event_area;
-            $events->event_adress = $request->event_adress;
-            $events->email = $request->email;
-            $events->event_date = $request->event_date;
-            $events->description = $request->description;
-  
-            
-            $file = $request->filename;
-            dd($file);
-            //物理保存
-            $name = $file->getClientOriginalName();
-            $move = $file->move('storage', $name);
-
-            //データベースにパスを保存
-            $dataName = 'storage/'.$name;
-            $events->eventpic_filename = $dataName;  
-            
-            $events->save(); 
+                    //データベースにパスを保存
+                    $dataName = 'storage/'.$name;
+                    $events->eventpic_filename = $dataName;  
+                    
+                    $events->save(); 
+                    
+                }    
             // dd($events);
             return redirect('/events');
             
@@ -271,8 +355,17 @@ class EventsController extends Controller
         }       
         
             // 削除 処 理
-        public function destroy(Event $event) {
-                $event->delete();
+        // public function destroy(Request $request) {
+        public function destroy(Event $events) {
+                // $event->delete();
+                // dd($request);
+                
+                $events = Event::where('user_id',Auth::user()->id)->find($events->id);
+                // $events->life_flg = $request->life_flg;
+                $events->life_flg = 0;
+                $events->save();
+                
+                
                 return redirect('/events');
             }
             

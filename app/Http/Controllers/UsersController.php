@@ -54,6 +54,7 @@ class UsersController extends Controller
                 ->withInput()
                 ->withErrors($validator);
                 }
+   
         
         //
         $users = User::where('id',Auth::user()->id)->first();

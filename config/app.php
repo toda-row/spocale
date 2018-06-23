@@ -170,6 +170,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
+        App\Providers\FacebookServiceProvider::class,
         
 
         /*
