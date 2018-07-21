@@ -92,7 +92,8 @@ Route::get("auth/twitter/logout","Auth\LoginController@getLogout");
 
 //EMAIL
 // Route::get('/events/eventadd', 'EmailsController@EventsNotification');
-Route::get('/events/mail', 'EmailsController@EventsNotification');
+Route::get('/events/eventaddmail', 'EmailsController@EventsNotification');
+Route::get('/events/registermail', 'EmailsController@UsersregisterNotification');
 /** * イベント作成処理 */
 
 /** *  イベント検索結果画面 */

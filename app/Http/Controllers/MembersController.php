@@ -44,35 +44,35 @@ class MembersController extends Controller
                     ->first();
                     // ->join('users','users.id','=','events.user_id');
     
-    // $events->event_name;
-    // dd($events);
+    $events->event_name;
+    // // dd($events);
 
                 
-    $to = [
-            // [
-            //     'name' => 'Laravel-01',
-            //     'email' => 'yoshihiro.t.88@gmail.com'
-            // ],
-            [
-                'name' => 'Laravel-02',
-                'email' => Auth::user()->email
-            ]
-        ];
+    // $to = [
+    //         // [
+    //         //     'name' => 'Laravel-01',
+    //         //     'email' => 'yoshihiro.t.88@gmail.com'
+    //         // ],
+    //         [
+    //             'name' => 'Laravel-02',
+    //             'email' => Auth::user()->email
+    //         ]
+    //     ];
         
-    // $cc = 'cc@mail.com';
-    $bcc =  [
-        // 'name' => 'Spocale-owner',
-        'email' =>'info@itjoho.com'
-        ];
-    //送れてない
+    // // $cc = 'cc@mail.com';
+    // $bcc =  [
+    //     // 'name' => 'Spocale-owner',
+    //     'email' =>'spocale@gmail.com'
+    //     ];
+    // //送れてない
         
-    Mail::to($to)
-            // ->cc($cc)
-            ->bcc($bcc)
-            ->send(new EventsNotification($name, $text,$events));
+    // Mail::to($to)
+    //         // ->cc($cc)
+    //         ->bcc($bcc)
+    //         ->send(new EventsNotification($name, $text,$events));
 
 // ＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝            
             
-            return redirect('/events');
+            return redirect('/events/eventaddmail');
         }
 }

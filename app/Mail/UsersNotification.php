@@ -27,7 +27,7 @@ class EventsNotification extends Mailable
     public function __construct($name, $text, $events)
     {
         //
-        $this->title = sprintf('スポカレ %sさん、イベント参加ありがとうございます。', $name);
+        $this->title = sprintf('スポカレ %sさん、ご登録ありがとうございます。', $name);
         $this->text = $text;
         $this->events = $events;
         // dd($this);

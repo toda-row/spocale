@@ -171,6 +171,7 @@ return [
          */
         Laravel\Socialite\SocialiteServiceProvider::class,
         App\Providers\FacebookServiceProvider::class,
+        // Kertz\Twitteroauth\Twitteroauth::class,
         
 
         /*

@@ -31,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/events/registermail';
 
     /**
      * Create a new controller instance.
@@ -71,5 +71,35 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+        
+        // User::create([
+        //     'name' => $data['name'],
+        //     'email' => $data['email'],
+        //     'password' => bcrypt($data['password']),
+        // ]);
+        
+        // return redirect('/events/registermail');
+        
+    // $name = Auth::user()->name;
+    // $to = [
+    //         // [ 'name' => 'Laravel-01',
+    //         //   'email' => 'yoshihiro.t.88@gmail.com' ],
+    //         [
+    //             'name' => 'Laravel-02',
+    //             'email' => Auth::user()->email
+    //         ]
+    //     ];
+        
+    // // $cc = 'cc@mail.com';
+    // $bcc =  [
+    //     // 'name' => 'Spocale-owner',
+    //     'email' =>'spocale@gmail.com'
+    //     ];
+    // //送れてない
+        
+    // Mail::to($to)
+    //         // ->cc($cc)
+    //         ->bcc($bcc)
+    //         ->send(new UsersNotification($name));
     }
 }

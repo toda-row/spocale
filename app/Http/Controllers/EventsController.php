@@ -119,41 +119,54 @@ class EventsController extends Controller
                         // 投稿したい文章を入力
             $message = 'FB APIからの投稿です。';
             
-            // PHP SDKを読み込む。パスを確認すること。
-            // require_once 'src/facebook.php';
-            // require_once 'vendor/facebook/php-sdk/src/Facebook/Facebook.php';
+            // $fb = new \Facebook\Facebook([
+            //           'app_id' => '{$facebook_appId}',
+            //           'app_secret' => '{app-secret}',
+            //           'default_graph_version' => 'v2.10',
+            //           //'default_access_token' => '{access-token}', // optional
+            //         ]);
 
-            // require_once( base_path('vendor/facebook/php-sdk-v4/src/Facebook/autoload.php') );
-            // require_once( base_path('vendor/facebook/php-sdk/src/Facebook/Facebook.php') );
             
-            // $facebook = new Facebook(array('appId' => $facebook_appId, 'secret' => $facebook_secret, 'access_token' => $facebook_access_token, ));
-            // // Facebookオブジェクト生成時にappId、secretを指定しなくても投稿可（投稿時のパラメータにaccess_tokenを指定するため）
+            // $facebook = new \Facebook\Facebook(array('appId' => $facebook_appId, 'secret' => $facebook_secret, 'access_token' => $facebook_access_token, ));
+            // Facebookオブジェクト生成時にappId、secretを指定しなくても投稿可（投稿時のパラメータにaccess_tokenを指定するため）
             
-            // // POSTメソッドで「/me/feed/」を指定すると自分のタイムラインに投稿できる
+            // POSTメソッドで「/me/feed/」を指定すると自分のタイムラインに投稿できる
             
-            // $facebook->api('/144490655923109/feed/', 'GET', array(
-            //     // 'access_token' => $facebook_access_token, 
-            //     'message' => $message
-            //     ));
+            // $facebook->get('/me', $facebook_access_token);
+            // get('/144490655923109/feed/', 
+                // 'GET', array(
+                // 'access_token' => $facebook_access_token, 
+                // '{$facebook_access_token}'
+                // 'message' => $message
+                // ));
+                
+                // $res = $fb->get('/me', '{access-token}');
             
             
-            //             Facebookページのウォールに投稿する。
+                        // Facebookページのウォールに投稿する。
             // $facebook->api('/（対象ページのID）/feed/', 'GET', array('access_token' => '...', 'message' => '...'));
 
             
-            // =============================
-            // require "vendor/autoload.php";
 
 
+            $twitteruser = "spocale";
             $consumerKey       = env("TWITTER_CLIENT_ID");
             $consumerSecret    = env("TWITTER_CLIENT_SECRET");
             $accessToken       = env("TWITTER_ACCESS_ID");
             $accessTokenSecret = env("TWITTER_ACCESS_SECRET");
             
-            $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-            $result = $twitter->post("statuses/update", array("status" => "TEST Tweet."));
+            function getConnectionWithAccessToken($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret) {
+                  $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+                  return $connection;
+                }
+            $connection = getConnectionWithAccessToken($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+            // $tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$twitteruser."&count=".$notweets);
+            $tweets = $connection->post("statuses/update", array("status" => "TEST Tweet."));
+            
+            // $twitter = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+            // $result = $twitter->post("statuses/update", array("status" => "TEST Tweet."));
 
-            // =============================
+            // // =============================
             
             $events->save(); 
             

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6694c0cfe7619e45de519c634ee4749a",
+    "content-hash": "7096dcde6d08efa441c405843f3a967a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -645,6 +645,22 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "kertz/twitteroauth",
+            "version": "master",
+            "source": {
+                "type": "git",
+                "url": "http://github.com/kertz/twitteroauth",
+                "reference": "master"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "."
+                ]
+            },
+            "time": "2014-02-23T11:27:58+00:00"
         },
         {
             "name": "laravel/framework",
@@ -4445,7 +4461,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "kertz/twitteroauth": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

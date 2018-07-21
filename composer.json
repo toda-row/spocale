@@ -6,11 +6,22 @@
     "type": "project",
     
     "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/toda-row/twitter"
-        }
-    ],
+           {
+                "type": "package",
+                "package": {
+                    "name": "kertz/twitteroauth",
+                    "version": "master",
+                    "source": {
+                        "url": "http://github.com/kertz/twitteroauth",
+                        "type": "git",
+                        "reference": "master"
+                    },
+                    "autoload": {
+                        "classmap": ["."]
+                    }
+                }
+            }
+        ],
     
     "require": {
         "php": ">=7.0.0",
@@ -21,7 +32,9 @@
         "laravelcollective/html": "^5.5",
         "nesbot/carbon": "^1.29",
         "facebook/graph-sdk" : "~5.0",
-         "thujohn/twitter": "dev-patch"
+        "kertz/twitteroauth": "dev-master",
+        "thujohn/twitter": "dev-master"
+        
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -64,7 +77,8 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "secure-http": false
     }
     
     
