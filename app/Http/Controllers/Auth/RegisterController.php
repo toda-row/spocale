@@ -6,7 +6,8 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Mail\UsersNotification;
+use App\Http\Service\RegisterService;
+use App\Http\Vo\MailVo;
 use Socialite;
 use App\Event;
 use App\Member;
@@ -67,34 +68,25 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-        
+        // ユーザの登録
+        RegisterService::execute($data);
+        // メール情報のセット
+        $mailData = [
+          'userName' => $data['name'],
+          'toEmail' => $data['email'],
+          'pasword' => $data['pasword'],
+          'sendFrom' => Config::get('const.sendFrom'),
+          'subject' => 'スポカレ'.$data['name'].'さん、ご登録ありがとうございます。'
+          'bcc' => Config::get('const.bcc'),
+          'bodyPath' => Config::get('const.registerBodyPath')
+        ];
+        // メールVOインスタンスを生成
+        $vo = new MailVo();
+        // VOにメール情報をセット
+        $vo->setData($mailData);
+        // メールの送信
+        MailService::execute($vo);
 
-        
-    $name = Auth::user()->name;
-    $to = [
-            // [ 'name' => 'Laravel-01',
-            //   'email' => 'yoshihiro.t.88@gmail.com' ],
-            [
-                'name' => 'Laravel-02',
-                'email' => Auth::user()->email
-            ]
-        ];
-        
-    // $cc = 'cc@mail.com';
-    $bcc =  [
-        // 'name' => 'Spocale-owner',
-        'email' =>'spocale@gmail.com'
-        ];
-    //送れてない
-        
-    Mail::to($to)
-            // ->cc($cc)
-            ->bcc($bcc)
-            ->send(new UsersNotification($name));
+        return redirect('/events');
     }
 }

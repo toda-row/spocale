@@ -1,11 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-    
 class Event extends Model
 {
     //
@@ -14,13 +13,13 @@ class Event extends Model
         'created_at',
         'updated_at'
         // 'deleted_at'
-        
-        
+
+
     ];
 
     protected $guarded = ['id'];
-    
-    
+
+
     // fillableとguardedの指定はどちらかだけでいい
     // public function getEventDateAttribute($value)
     //     {
@@ -34,10 +33,9 @@ class Event extends Model
     //         {
     //             return $this->publishedAt->format('YY-MM-DD') .'T'.$this->publishedAt->format('HH:MM:SS');
     //         }
-    
+
     // public function getDates()
     //     {
     //         return array();
     //     }
-
 }
