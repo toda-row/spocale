@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\UsersNotification;
 use Socialite;
 use App\Event;
 use App\Member;
@@ -72,34 +73,28 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
         
-        // User::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => bcrypt($data['password']),
-        // ]);
+
         
-        // return redirect('/events/registermail');
+    $name = Auth::user()->name;
+    $to = [
+            // [ 'name' => 'Laravel-01',
+            //   'email' => 'yoshihiro.t.88@gmail.com' ],
+            [
+                'name' => 'Laravel-02',
+                'email' => Auth::user()->email
+            ]
+        ];
         
-    // $name = Auth::user()->name;
-    // $to = [
-    //         // [ 'name' => 'Laravel-01',
-    //         //   'email' => 'yoshihiro.t.88@gmail.com' ],
-    //         [
-    //             'name' => 'Laravel-02',
-    //             'email' => Auth::user()->email
-    //         ]
-    //     ];
+    // $cc = 'cc@mail.com';
+    $bcc =  [
+        // 'name' => 'Spocale-owner',
+        'email' =>'spocale@gmail.com'
+        ];
+    //送れてない
         
-    // // $cc = 'cc@mail.com';
-    // $bcc =  [
-    //     // 'name' => 'Spocale-owner',
-    //     'email' =>'spocale@gmail.com'
-    //     ];
-    // //送れてない
-        
-    // Mail::to($to)
-    //         // ->cc($cc)
-    //         ->bcc($bcc)
-    //         ->send(new UsersNotification($name));
+    Mail::to($to)
+            // ->cc($cc)
+            ->bcc($bcc)
+            ->send(new UsersNotification($name));
     }
 }

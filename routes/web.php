@@ -23,6 +23,9 @@ Route::get('/events','EventsController@store');
 Route::get('/attend','MembersController@attend');
 Route::post('/attend','MembersController@attend');
 
+/** * イベント参加キャンセル処理 */
+Route::post('/events/attend/delete/{events}','MembersController@destroy');
+
 /** * イベント作成画面 */
 Route::get('/events/new','EventsController@eventnew');
 
@@ -94,6 +97,7 @@ Route::get("auth/twitter/logout","Auth\LoginController@getLogout");
 // Route::get('/events/eventadd', 'EmailsController@EventsNotification');
 Route::get('/events/eventaddmail', 'EmailsController@EventsNotification');
 Route::get('/events/registermail', 'EmailsController@UsersregisterNotification');
+Route::get('/events/newevent/mail', 'EmailsController@NewEventsNotification');
 /** * イベント作成処理 */
 
 /** *  イベント検索結果画面 */

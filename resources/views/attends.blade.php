@@ -1,7 +1,7 @@
             @if (count($events) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        参加するイベント 一 覧　（古いものを消して、現在以降のイベント）
+                        参加する予定イベント 一 覧
                         <a href="{{ url('events/oldattendsevent/')}}">過去の参加イベント</a>
                     </div>
                     <div class="panel-body">
@@ -43,23 +43,23 @@
                                     <div><?=$attenddate;?> <?=$attendtime;?></div>
                                     
                                 </td>
-                                     <!-- 本: 更新 ボタン -->
+                                     <!-- イベントキャンセルボタン -->
                                  <td>
-                                 <form action="{{ url('events/edit/'.$attendsevent->id)}}" method="POST">
+                                 <form action="{{ url('/events/attend/delete/'.$attendsevent->id)}}" method="POST">
                                      {{csrf_field()}}
                                      <button type="submit" class="btn btn-primary">
-                                     <i class="fa fa-close glyphicon glyphicon-refresh"></i><span class="hidden-xs">キャンセル</span></button>
+                                     <i class="far fa-times-circle"></i><span class="hidden-xs">キャンセル</span></button>
                                  </form>
                                  </td>
                                  
-                                <!-- 本: 削除 ボタン -->
+                                <!-- 主催者問い合わせ ボタン -->
                                 <td>
                                     <form action="{{ url('events/'.$attendsevent->id)}}" method="POST">
                                     {{csrf_field()}}
                                     {{method_field('DELETE')}}
                                     
                                     <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-envelope-o glyphicon glyphicon-trash"></i><span class="hidden-xs">問い合わせ</span>
+                                        <i class="far fa-envelope"></i><span class="hidden-xs">問い合わせ</span>
                                     </button>
                                     </form>
                                 </td>

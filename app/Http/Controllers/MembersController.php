@@ -75,4 +75,17 @@ class MembersController extends Controller
             
             return redirect('/events/eventaddmail');
         }
+        
+        public function destroy(Member $attendsevent) {
+            // $event->delete();
+            // dd($request);
+            
+            $attendsevent = Member::where('attenduser_id',Auth::user()->id)->find($attendsevent->id);
+            // $events->life_flg = $request->life_flg;
+            $attendsevent->life_flg = 0;
+            $attendsevent->save();
+            
+            
+            return redirect('/events');
+        }
 }

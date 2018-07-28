@@ -172,7 +172,7 @@ class EventsController extends Controller
             
             
             
-            return redirect('/events');
+            return redirect('/events/newevent/mail');
         }
         
         //更新処理
@@ -235,12 +235,15 @@ class EventsController extends Controller
         
         // イベント管理画面
         public function store() {
+            
+            $nowdate=date('Y-m-d');
+            
             //全部表示されていたのをユーザーのみに変更
             $events = Event::where('user_id',Auth::user()->id)
             // ;dd($events);
-            ->where("life_flg","1")
+            ->where('life_flg','1')
+            // ->where('event_date', '>=', '$nowdate')
             ->orderBy('event_date', 'desc')
-            // ;dd($events);
             ->paginate(5);
             // ;dd($events);
             

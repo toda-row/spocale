@@ -58,33 +58,40 @@ class EmailsController extends Controller
   
       public function UsersregisterNotification()
           {
-            $name = Auth::user()->name;
-        
-            $text = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
-            
-                        
             $to = [
-                    // [
-                    //     'name' => 'Laravel-01',
-                    //     'email' => 'yoshihiro.t.88@gmail.com'
-                    // ],
-                    [
-                        'name' => 'Laravel-02',
+                        'name' => 'スポカレ事務局',
                         'email' => Auth::user()->email
-                    ]
                 ];
-                
-            // $cc = 'cc@mail.com';
             $bcc =  ['email' =>'spocale@gmail.com'];
-            //送れてない
-                
-            Mail::to($to)
-                    // ->cc($cc)
-                    ->bcc($bcc)
-                    ->send(new UsersNotification($name, $text));
+            
+            Mail::send(['text' => 'emails.new_user_notification_plain'], [
+                'text' => $this->text,
+                'name'=> $this->users->name,
+                'mail'=> $this->users->email
+                ], function ($m) use ($email) {
+                $m->from('idol.navigator@gmail.com', 'SPOCALE');
+                // $m->cc($cc);
+                $m->bcc($bcc);
+                $m->to($to)->subject('$this->title');
+                });
                     
             return redirect('/events');
           }
+          
+        public function NewEventsNotification(Request $request){
+            
+            Mail::send(['text' => 'emails.new_event_notification_plain'], [
+                'text' => $this->text,
+                'eventName' => $this->events->event_name,
+                'eventPrice' => $this->events->event_price,
+                ], function ($m) use ($email) {
+                $m->from('idol.navigator@gmail.com', 'SPOCALE');
+                $m->cc($cc);
+                $m->bcc($bcc);
+                $m->to($to)->subject($this->title);
+                });
+            
+        }
 
 
 }

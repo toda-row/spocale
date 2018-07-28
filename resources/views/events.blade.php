@@ -12,7 +12,7 @@
             @if (count($events) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        主催するイベント 一 覧　（古いものを消して、現在以降のイベント）
+                        主催する予定のイベント一覧　
                         <a href="{{ url('events/old/')}}">過去の主催イベント</a>
                     </div>
                     <div class="panel-body">
@@ -50,8 +50,9 @@
                                     <?php
                                         $sdate = substr("{$event->event_date}",5,5);
                                         $stime = substr("{$event->event_time}",0,5);
+                                         $nowdate=date('Y-m-d');
                                     ?>
-                                    <div><?=$sdate;?> <?=$stime;?></div>
+                                    <div><?=$sdate;?> <?=$stime;?><?=$nowdate;?></div>
 
                                 </td>
                                      <!-- 本: 更新 ボタン -->
@@ -59,7 +60,7 @@
                                  <form action="{{ url('events/edit/'.$event->id)}}" method="POST">
                                      {{csrf_field()}}
                                      <button type="submit" class="btn btn-primary">
-                                     <i class="fa fa-refresh glyphicon glyphicon-refresh"></i> <span class="hidden-xs">更新</span> </button>
+                                     <i class="fas fa-sync-alt"></i> <span class="hidden-xs">更新</span> </button>
                                  </form>
                                  </td>
                                  
@@ -71,7 +72,7 @@
                                     <!--{{method_field('DELETE')}}-->
                                     <input type="hidden" name="life_flg" id="life_flg" value="0" > 
                                     <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-trash glyphicon glyphicon-trash"></i><span class="hidden-xs">削除</span>
+                                        <i class="far fa-trash-alt"></i><span class="hidden-xs">削除</span>
                                     </button>
                                     </form>
                                 </td>
@@ -79,8 +80,8 @@
                                  <td>
                                  <form action="{{ url('events/copy/'.$event->id)}}" method="POST">
                                      {{csrf_field()}}
-                                     <button type="submit" class="btn btn-primary">
-                                     <i class="fa fa-copy glyphicon glyphicon-refresh"></i><span class="hidden-xs">複製</span>
+                                     <button type="submit" class="btn btn-warning">
+                                     <i class="far fa-copy"></i><span class="hidden-xs">複製</span>
                                      </button>
                                  </form>
                                  </td>
