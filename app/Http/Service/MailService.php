@@ -14,6 +14,7 @@ class MailService
      */
     public static function execute(MailVo $vo)
     {
+<<<<<<< HEAD
         Mail::send(
         ['text' => $vo->getBodyPat()], 
         [
@@ -22,6 +23,12 @@ class MailService
             ], 
             
         function ($message) use ($vo) {
+=======
+        Mail::send(['text' => $vo->getBodyPat())], [
+          "name" => $vo->getUserName(),
+          "email" => $vo->getToEmail()
+        ], function ($message) use ($vo) {
+>>>>>>> origin/master
             $message->to($vo->getToEmail())->bcc($vo->getBcc())->subject($vo->getSubject());
         });
     }

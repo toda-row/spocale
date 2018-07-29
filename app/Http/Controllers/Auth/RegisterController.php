@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Http\Service\RegisterService;
+<<<<<<< HEAD
 use App\Http\Service\MailService;
+=======
+>>>>>>> origin/master
 use App\Http\Vo\MailVo;
 use Socialite;
 use App\Event;
@@ -76,9 +79,15 @@ class RegisterController extends Controller
         $mailData = [
           'userName' => $data['name'],
           'toEmail' => $data['email'],
+<<<<<<< HEAD
           'password' => $data['password'],
           'sendFrom' => Config::get('const.sendFrom'),
           'subject' => 'スポカレ'.$data['name'].'さん、ご登録ありがとうございます。',
+=======
+          'pasword' => $data['pasword'],
+          'sendFrom' => Config::get('const.sendFrom'),
+          'subject' => 'スポカレ'.$data['name'].'さん、ご登録ありがとうございます。'
+>>>>>>> origin/master
           'bcc' => Config::get('const.bcc'),
           'bodyPath' => Config::get('const.registerBodyPath')
         ];
